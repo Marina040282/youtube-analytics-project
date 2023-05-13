@@ -12,7 +12,7 @@ class Channel:
         self.title = ''
         self.description = ''
         self.url = ''
-        self.subscriber_count = ''
+        self.subscriber_count = 0
         self.video_count = 0
         self.view_count = 0
 
@@ -55,4 +55,35 @@ class Channel:
         with open(json_fail, 'w') as f:
             json.dump(to_json, f, sort_keys=True, indent=2)
 
+    # Домашнее задание 14.1
+    def __str__(self):
+        return f'{self.title} ({self.url})'
+
+
+    def __add__(self, other):
+        return self.subscriber_count + other.subscriber_count
+
+
+    def __sub__(self, other):
+        return int(self.subscriber_count) - int(other.subscriber_count)
+
+
+    def __gt__(self, other):
+        return self.subscriber_count > other.subscriber_count
+
+
+    def __ge__(self, other):
+        return self.subscriber_count >= other.subscriber_count
+
+
+    def __lt__(self, other):
+        return self.subscriber_count < other.subscriber_count
+
+
+    def __le__(self, other):
+        return self.subscriber_count <= other.subscriber_count
+
+
+    def __eq__(self, other):
+        return self.subscriber_count == other.subscriber_count
 
