@@ -1,4 +1,4 @@
-from src.video import Video, PLVideo
+from youtube_analytics_project.src.video import Video, PLVideo
 
 if __name__ == '__main__':
     # Создаем два экземпляра класса

@@ -24,7 +24,7 @@ class Channel:
     def print_info(self) -> None:
         """Выводит в консоль информацию о канале."""
         api_key: str = os.getenv('API_KEY')
-        #api_key = "AIzaSyDEyhgJHSj9e4vTp9lAvOP3-rPm3hOagzU" #мой ключ
+        # api_key = "AIzaSyDEyhgJHSj9e4vTp9lAvOP3-rPm3hOagzU" #мой ключ
         youtube = build('youtube', 'v3', developerKey=api_key)
         channel = youtube.channels().list(id=self.__channel_id, part='snippet,statistics').execute()
         items = channel["items"][0]["snippet"]
@@ -40,7 +40,8 @@ class Channel:
 
     @classmethod
     def get_service(cls):
-        return cls.channel_id
+        apikey: str = os.getenv('API_KEY')
+        return build('youtube', 'v3', developerKey=apikey)
 
 
     def to_json(self, json_fail):
