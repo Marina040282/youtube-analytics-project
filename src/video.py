@@ -9,22 +9,24 @@ class Video:
         """ метод  init, получает для класса id видео + определение переменных класса"""
         self.video_id = video_id
 
-        api_key: str = 'AIzaSyB5hhIW1yHBoo4ZoayTT0Wi4hMqhWeos9c'
-        self.youtube = build('youtube', 'v3', developerKey=api_key)
-        video_response = Channel.get_service().videos().list(part='snippet,statistics,contentDetails,topicDetails',
+        try:
+            api_key: str = 'AIzaSyB5hhIW1yHBoo4ZoayTT0Wi4hMqhWeos9c'
+            self.youtube = build('youtube', 'v3', developerKey=api_key)
+            video_response = Channel.get_service().videos().list(part='snippet,statistics,contentDetails,topicDetails',
                                                     id=video_id
                                                     ).execute()
 
-        self.title: str = video_response['items'][0]['snippet']['title']  # название видео
-        self.view_count: int = video_response['items'][0]['statistics']['viewCount']  # количество просмотров
-        self.like_count: int = video_response['items'][0]['statistics']['likeCount']  # количество лайков
-        self.comment_count: int = video_response['items'][0]['statistics']['commentCount']  # количество комментариев
-        self.url_video = f"https://www.youtube.com/channel/{self.video_id}"  # адрес видео
-
-    def __str__(self):
-        """реализация сетода str"""
-        return f"{self.title}"
-
+            self.title: str = video_response['items'][0]['snippet']['title']  # название видео
+            self.view_count: int = video_response['items'][0]['statistics']['viewCount']  # количество просмотров
+            self.like_count: int = video_response['items'][0]['statistics']['likeCount']  # количество лайков
+            self.comment_count: int = video_response['items'][0]['statistics']['commentCount']  # количество комментариев
+            self.url_video = f"https://www.youtube.com/channel/{self.video_id}"  # адрес видео
+        except IndexError:
+            self.title = None
+            self.view_count = None
+            self.comment_count = None
+            self.like_count = None
+            self.url_video = None
 
     def __str__(self):
         """реализация сетода str"""
