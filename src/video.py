@@ -10,7 +10,7 @@ class Video:
         self.video_id = video_id
 
         try:
-            api_key: str = 'AIzaSyB5hhIW1yHBoo4ZoayTT0Wi4hMqhWeos9c'
+            api_key: str = os.getenv('API_KEY')
             self.youtube = build('youtube', 'v3', developerKey=api_key)
             video_response = Channel.get_service().videos().list(part='snippet,statistics,contentDetails,topicDetails',
                                                     id=video_id
